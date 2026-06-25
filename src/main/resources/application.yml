@@ -57,8 +57,8 @@ ina:
 aws:
   region: ap-south-1
   credentials:
-    accessKey: AKIAR3HUOUNYNXUZGSGK
-    secretKey: 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
+    accessKey: ${ACCESS_KEY}
+    secretKey: ${SECRET_KEY}
 
 s3:
   bucket:
