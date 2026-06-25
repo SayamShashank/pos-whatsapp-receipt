@@ -29,7 +29,7 @@ whatsapp:
   api:
     base-url: https://graph.facebook.com/v25.0
     phone-number-id: '1095137563681847'
-    access-token: EAAf1X0mosUwBRO8K6ja8VYLPQoL3sy4sArZAFIk40UamZCiOt1EfwSgGGi8hswuom6ZB9mMYZBoXclbCnZABcrs6stEzviFQ9OmCZC7ZBu6FkoAaxxByQlJ5eWpGZCeAOMaPVrfN6tn8ZC1dcPDeN8pJbg5y6oRsQb9k51ZCFT0ZC1YYmWP5ZBhtZBzgwlENcB4th4wZDZD
+    access-token: ${WHATSAPP_ACCESS_TOKEN}
     business-account-id: '945569721523597'
     read-timeout-seconds: '30'
     connect-timeout-seconds: '10'
@@ -57,8 +57,8 @@ ina:
 aws:
   region: ap-south-1
   credentials:
-    accessKey: ${ACCESS_KEY}
-    secretKey: ${SECRET_KEY}
+    accessKey: ${AWS_ACCESS_KEY}
+    secretKey: ${AWS_SECRET_KEY}
 
 s3:
   bucket:
