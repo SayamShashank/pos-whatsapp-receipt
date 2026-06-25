@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+       body {
+         font-family: Arial, sans-serif;
+         font-size: 13px;
+         color: #1a1a1a;
+         background: #fff;
+         padding: 24px;
+         max-width: 480px;
+         margin: auto;
+       }
+
+       /* ── HEADER ── */
+       .header {
+         text-align: center;
+         padding-bottom: 14px;
+         border-bottom: 2px solid #1a1a2e;
+         margin-bottom: 16px;
+       }
+       .header .store-name {
+         font-size: 20px;
+         font-weight: bold;
+         color: #1a1a2e;
+         letter-spacing: 1px;
+         text-transform: uppercase;
+       }
+       .header .store-address {
+         font-size: 11px;
+         color: #666;
+         margin-top: 4px;
+       }
+       .header .receipt-badge {
+         display: inline-block;
+         margin-top: 10px;
+         background: #1a1a2e;
+         color: #fff;
+         font-size: 11px;
+         padding: 3px 12px;
+         border-radius: 12px;
+         letter-spacing: 0.5px;
+       }
+
+       /* ── SECTION ── */
+       .section { margin-bottom: 14px; }
+       .section-title {
+         font-size: 10px;
+         font-weight: bold;
+         color: #888;
+         text-transform: uppercase;
+         letter-spacing: 0.8px;
+         margin-bottom: 6px;
+         padding-bottom: 4px;
+         border-bottom: 1px solid #eee;
+       }
+
+       /* ── ROWS ── */
+       .row { display: flex; justify-content: space-between; padding: 3px 0; }
+       .row .label { color: #666; flex: 1; }
+       .row .value { font-weight: 600; text-align: right; flex: 1; }
+
+       /* ── DIVIDER ── */
+       .divider { border: none; border-top: 1px dashed #ccc; margin: 12px 0; }
+
+       /* ── PAYMENT CARD ── */
+       .payment-card {
+         background: #f8f9ff;
+         border: 1px solid #dde2f0;
+         border-radius: 8px;
+         padding: 12px 14px;
+         margin-bottom: 14px;
+       }
+       .payment-card .payment-method-row {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+       }
+       .payment-card .method-badge {
+         background: #1a1a2e;
+         color: #fff;
+         font-size: 11px;
+         font-weight: bold;
+         padding: 3px 10px;
+         border-radius: 4px;
+         letter-spacing: 1px;
+       }
+       .payment-card .brand { font-size: 14px; font-weight: bold; color: #000000; }
+       .brand[style*="VISA"] { color: #1a3a8f; }
+       .brand[style*="MASTERCARD"] { color: #eb001b; }
+       .brand[style*="AMEX"] { color: #002663; }
+       .brand[style*="RUPAY"] { color: #f26522; }
+       .brand[style*="DISCOVER"] { color: #922f0b; }
+       .brand[style*="DINERS"] { color: #004b91; }
+       .brand[style*="JCB"] { color: #00378f; }
+       .brand[style*="MAESTRO"] { color: #0065cb; }
+       .brand[style*="UNIONPAY"] { color: #004789; }
+       .card-number { font-size: 12px; color: #555; letter-spacing: 2px; margin-top: 6px; }
+
+       /* ── TOTALS ── */
+       .totals-box {
+         background: #f4f4f4;
+         border-radius: 8px;
+         padding: 12px 14px;
+         margin-bottom: 14px;
+       }
+       .totals-box .row .label { color: #555; }
+       .totals-box .total-row .label,
+       .totals-box .total-row .value { font-size: 16px; font-weight: bold; color: #1a1a2e; }
+       .totals-box .discount-row .value { color: #c0392b; }
+
+       /* ── INFO GRID ── */
+       .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; }
+       .info-grid .row .label { font-size: 11px; color: #888; }
+       .info-grid .row .value { font-size: 11px; color: #333; }
+
+       /* ── FOOTER ── */
+       .footer {
+         text-align: center;
+         margin-top: 18px;
+         padding-top: 12px;
+         border-top: 2px solid #1a1a2e;
+         font-size: 11px;
+         color: #888;
+       }
+       .footer .note { font-size: 12px; font-weight: bold; color: #1a1a2e; margin-bottom: 4px; }
+       .footer .generated { font-size: 10px; margin-top: 6px; color: #aaa; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="store-name">{{storeName}}</div>
+    <div class="store-address">{{storeAddress}}</div>
+    <div class="receipt-badge">PAYMENT RECEIPT</div>
+    <div class="status-badge">{{status}}</div>
+  </div>
+
+  <!-- TRANSACTION DETAILS -->
+  <div class="section">
+    <div class="section-title">Transaction Details</div>
+    <div class="row"><span class="label">Receipt No.</span>      <span class="value">{{receiptNumber}}</span></div>
+
+    <div class="row"><span class="label">Batch No.</span>      <span class="value">{{batchNumber}}</span></div>
+<!--    <div class="row"><span class="label">Transaction ID</span>   <span class="value">{{transactionId}}</span></div>-->
+    <div class="row"><span class="label">Date &amp; Time</span>  <span class="value">{{dateTime}}</span></div>
+    <div class="row"><span class="label">Transaction Type</span> <span class="value">{{transactionType}}</span></div>
+
+    <div class="row"><span class="label">RRN</span>      <span class="value">{{rrn}}</span></div>
+<!--    <div class="row"><span class="label">RRN</span>              <span class="value">{{rrn}}</span></div>-->
+    <div class="row"><span class="label">Auth Code</span>        <span class="value">{{authCode}}</span></div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- MERCHANT INFO -->
+  {{merchantBlock}}
+
+  <!-- PAYMENT METHOD -->
+  <div class="payment-card">
+    <div class="payment-method-row">
+      <div>
+          <div class="brand" style="--brand-color: {{paymentBrand}}">{{paymentBrand}}</div>
+        {{cardNumberBlock}}
+<!--        <div class="card-meta">PAN: {{pan}} &nbsp;|&nbsp; Exp: {{expiryDate}}</div>-->
+<!--        <div class="card-aid">AID: {{aid}}</div>-->
+      </div>
+      <div class="method-badge">{{paymentMethod}}</div>
+    </div>
+  </div>
+
+  <!-- TOTALS -->
+  <div class="totals-box section">
+    <div class="section-title">Amount Summary</div>
+    <div class="row"><span class="label">Tax</span> <span class="value">{{taxAmount}}</span></div>
+    {{discountBlock}}
+    <hr class="divider"/>
+    <div class="row total-row">
+      <span class="label">TOTAL</span>
+      <span class="value">{{totalAmount}}</span>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+
+
+  <!-- DEVICE INFO -->
+  {{deviceBlock}}
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="note">{{additionalNotes}}</div>
+    <div>This is a computer-generated receipt. No signature required.</div>
+    <div class="generated">Generated: {{dateTime}}</div>
+  </div>
+
+</body>
+</html>

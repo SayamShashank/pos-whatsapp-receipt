@@ -1,0 +1,65 @@
+spring:
+  application:
+    name: pos-receipt-whatsapp
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      write-dates-as-timestamps: 'false'
+
+  jpa:
+    generate-ddl: true
+    ddl-auto: create
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+server:
+  port: '8080'
+
+logging:
+  level:
+    com:
+      pos:
+        receipt: DEBUG
+    org:
+      springframework:
+        web:
+          reactive: INFO
+
+whatsapp:
+  api:
+    base-url: https://graph.facebook.com/v25.0
+    phone-number-id: '1095137563681847'
+    access-token: EAAf1X0mosUwBRO8K6ja8VYLPQoL3sy4sArZAFIk40UamZCiOt1EfwSgGGi8hswuom6ZB9mMYZBoXclbCnZABcrs6stEzviFQ9OmCZC7ZBu6FkoAaxxByQlJ5eWpGZCeAOMaPVrfN6tn8ZC1dcPDeN8pJbg5y6oRsQb9k51ZCFT0ZC1YYmWP5ZBhtZBzgwlENcB4th4wZDZD
+    business-account-id: '945569721523597'
+    read-timeout-seconds: '30'
+    connect-timeout-seconds: '10'
+
+ina:
+  database:
+    username: postgres
+    password: admin
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5433/inapayments?currentSchema=ina_pos_receipt
+    poolName: INAMHHikariCP
+    maxPoolSize: 100
+    minimumIdle: 10
+    idleTimeout: 600000
+    maxLifetime: 1800000
+    connectionTimeout: 60000
+    leakDetectionThreshold: 10000
+    autoCommit: false
+    cachePrepStmts: true
+    prepStmtCacheSize: 1024
+    prepStmtCacheSqlLimit: 4096
+    useServerPrepStmts: true
+    housekeepingPeriodMs: 60000
+
+aws:
+  region: ap-south-1
+  credentials:
+    accessKey: AKIAR3HUOUNYNXUZGSGK
+    secretKey: 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
+
+s3:
+  bucket:
+    name: ina-payments-gtms-files

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      color: #1a1a1a;
+      background: #fff;
+      padding: 24px;
+      max-width: 480px;
+      margin: auto;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      text-align: center;
+      padding-bottom: 14px;
+      border-bottom: 2px solid #1a1a2e;
+      margin-bottom: 16px;
+    }
+    .header .store-name {
+      font-size: 20px;
+      font-weight: bold;
+      color: #1a1a2e;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .header .store-address {
+      font-size: 11px;
+      color: #666;
+      margin-top: 4px;
+    }
+    .header .receipt-badge {
+      display: inline-block;
+      margin-top: 10px;
+      background: #1a1a2e;
+      color: #fff;
+      font-size: 11px;
+      padding: 3px 12px;
+      border-radius: 12px;
+      letter-spacing: 0.5px;
+    }
+    .header .batch-line {
+      font-size: 11px;
+      color: #888;
+      margin-top: 6px;
+    }
+
+    /* ── SECTION ── */
+    .section { margin-bottom: 14px; }
+    .section-title {
+      font-size: 10px;
+      font-weight: bold;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 6px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #eee;
+    }
+
+    /* ── ROWS ── */
+    .row { display: flex; justify-content: space-between; padding: 3px 0; }
+    .row .label { color: #666; flex: 1; }
+    .row .value { font-weight: 600; text-align: right; flex: 1; }
+
+    /* ── DIVIDER ── */
+    .divider { border: none; border-top: 1px dashed #ccc; margin: 12px 0; }
+
+    /* ── TRANSACTION CARD ── */
+    .txn-card {
+      background: #f8f9ff;
+      border: 1px solid #dde2f0;
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+    }
+    .txn-card .card-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .count-label { font-size: 11px; color: #888; }
+    .status-badge {
+      font-size: 11px;
+      font-weight: bold;
+      padding: 3px 10px;
+      border-radius: 4px;
+      letter-spacing: 1px;
+    }
+    .badge-approved { background: #1a1a2e; color: #fff; }
+    .badge-declined { background: #c0392b; color: #fff; }
+
+    /* Transaction table */
+    .txn-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+    .txn-table th {
+      font-size: 10px;
+      font-weight: bold;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 4px 3px;
+      border-bottom: 1px solid #dde2f0;
+      text-align: left;
+    }
+    .txn-table th.right,
+    .txn-table td.right { text-align: right; }
+    .txn-table td {
+      padding: 5px 3px;
+      border-bottom: 1px dashed #e8eaf5;
+      color: #333;
+      vertical-align: top;
+    }
+    .txn-table tr:last-child td { border-bottom: none; }
+    .pan-cell     { font-size: 10px; color: #777; letter-spacing: 1px; }
+    .amt-approved { font-weight: 700; color: #1a1a2e; }
+    .amt-declined { font-weight: 700; color: #c0392b; }
+    .type-pill {
+      display: inline-block;
+      background: #e8eaf5;
+      color: #1a1a2e;
+      font-size: 9px;
+      font-weight: bold;
+      padding: 1px 6px;
+      border-radius: 10px;
+    }
+    .no-txn { text-align: center; color: #aaa; font-size: 11px; padding: 6px 0; }
+
+    /* ── TOTALS BOX ── */
+    .totals-box {
+      background: #f4f4f4;
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+    }
+    .totals-box .row .label { color: #555; }
+    .totals-box .total-row .label,
+    .totals-box .total-row .value { font-size: 16px; font-weight: bold; color: #1a1a2e; }
+    .totals-box .sub-row .label,
+    .totals-box .sub-row .value   { font-size: 12px; color: #555; }
+
+    /* ── SPLIT BOX ── */
+    .split-box {
+      background: #f8f9ff;
+      border: 1px solid #dde2f0;
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 14px;
+    }
+    .split-box .row .label { color: #555; }
+
+    /* ── INFO GRID ── */
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; }
+    .info-grid .row .label { font-size: 11px; color: #888; }
+    .info-grid .row .value { font-size: 11px; color: #333; }
+
+    /* ── FOOTER ── */
+    .footer {
+      text-align: center;
+      margin-top: 18px;
+      padding-top: 12px;
+      border-top: 2px solid #1a1a2e;
+      font-size: 11px;
+      color: #888;
+    }
+    .footer .note { font-size: 12px; font-weight: bold; color: #1a1a2e; margin-bottom: 4px; }
+    .footer .generated { font-size: 10px; margin-top: 6px; color: #aaa; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="store-name">{{storeName}}</div>
+    <div class="store-address">{{storeAddress}}</div>
+    <div class="receipt-badge">RECONCILIATION RECEIPT</div>
+    <div class="batch-line">Batch&nbsp;{{batchNumber}}&nbsp;&middot;&nbsp;{{dateTime}}</div>
+  </div>
+
+  <!-- SESSION DETAILS -->
+  <div class="section">
+    <div class="section-title">Session Details</div>
+    <div class="row"><span class="label">Receipt No.</span>      <span class="value">{{receiptNumber}}</span></div>
+    <div class="row"><span class="label">Transaction Type</span> <span class="value">{{transactionType}}</span></div>
+    <div class="row"><span class="label">Currency</span>         <span class="value">{{currency}}</span></div>
+    <div class="row"><span class="label">Mobile No.</span>       <span class="value">{{mobileNumber}}</span></div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- MERCHANT INFO — built dynamically by service -->
+  {{merchantBlock}}
+
+  <!-- APPROVED TRANSACTIONS — built dynamically by service -->
+  {{approvedTxnsBlock}}
+
+  <!-- DECLINED TRANSACTIONS — built dynamically by service -->
+  {{declinedTxnsBlock}}
+
+  <hr class="divider"/>
+
+  <!-- AMOUNT SUMMARY -->
+  <div class="totals-box section">
+    <div class="section-title">Amount Summary</div>
+    <div class="row"><span class="label">Card Sales ({{saleCount}})</span>          <span class="value">{{saleAmount}}</span></div>
+    <div class="row"><span class="label">Bezi ({{beziCount}})</span>                <span class="value">{{beziAmount}}</span></div>
+    <div class="row"><span class="label">Cash ({{cashCount}})</span>                <span class="value">{{cashAmount}}</span></div>
+    <div class="row"><span class="label">Echo Sale ({{echoSaleCount}})</span>       <span class="value">{{echoSaleAmount}}</span></div>
+    <div class="row"><span class="label">Zinara ({{zinaraPaymentCount}})</span>     <span class="value">{{zinaraPaymentAmount}}</span></div>
+    <hr class="divider"/>
+    <div class="row sub-row"><span class="label">Sub Total ({{subTotalCount}})</span> <span class="value">{{subTotalAmount}}</span></div>
+    <hr class="divider"/>
+    <div class="row total-row"><span class="label">TOTAL ({{totalCount}})</span>    <span class="value">{{totalAmount}}</span></div>
+  </div>
+
+  <!-- CHANNEL SPLIT -->
+  <div class="split-box">
+    <div class="section-title">Channel Split</div>
+    <div class="row"><span class="label">Online ({{onlineTotalCount}})</span>   <span class="value">{{onlineTotalAmount}}</span></div>
+    <div class="row"><span class="label">Offline ({{offlineTotalCount}})</span> <span class="value">{{offlineTotalAmount}}</span></div>
+  </div>
+
+  <hr class="divider"/>
+
+
+
+  <!-- DEVICE INFO — built dynamically by service -->
+  {{deviceBlock}}
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="note">{{additionalNotes}}</div>
+    <div>This is a computer-generated reconciliation receipt.</div>
+    <div class="generated">Generated: {{dateTime}}</div>
+  </div>
+
+</body>
+</html>
